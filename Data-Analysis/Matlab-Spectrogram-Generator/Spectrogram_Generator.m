@@ -26,12 +26,13 @@ for i = 1:length(myFiles)
     fullFileName = fullfile(myDir, baseFileName);
     fprintf(1, 'Now reading %s\n', fullFileName);
     [wavData, fs] = audioread(fullFileName);
+    [x,fs] = audioread(fullFileName,[1,15*fs]);
 %    [x, fs] = audioread('Sample-Audio/Rainforest-Audio (1).wav');
-    spectrogram(wavData(:,1),hanning(256),128,256,fs,'yaxis');
+    spectrogram(x(:,1),hanning(256),128,256,fs,'yaxis');
     name = 'Rainforest Spectrogram Sample ' + string(i);
     title(name)
     colormap Jet
-    filename = 'Spectrogram/Rainforest-Spectrogram(' + string(i) +').png'
+    filename = 'Spectrogram/Rainforest-Spectrogram-15sec(' + string(i) +').png'
     saveas(gcf,filename);
 end
 
